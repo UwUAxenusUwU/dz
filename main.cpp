@@ -1,96 +1,280 @@
-#include <iostream>
-#include <conio.h>
+#include<iostream>
+
 using namespace std;
 
-int factorial(int n);
-double power(double a, int b);
-int fibonacci_limit(int limit);
-int fibonacci_number(int limit);
+#define tab "\t"
+
+const int ROWS = 3;
+const int COLS = 5;
+
+void FillRand(int arr[], const int n);
+void FillRand(double arr[], const int n);
+void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS);
+
+void Print(int arr[], const int n);
+void Print(double arr[], const int n);
+void Print(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void Print(double arr[ROWS][COLS], const int ROWS, const int COLS);
+
+void Sort(int arr[], const int n);
+void Sort(double arr[], const int n);
+void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS);
+
+int Sum(int arr[], const int n);
+double Sum(double arr[], const int n);
+int Sum(int arr[ROWS][COLS], const int ROWS, const int COLS);
+double Sum(double arr[ROWS][COLS], const int ROWS, const int COLS);
+
+double Avg(int arr[], const int n);
+double Avg(double arr[], const int n);
+double Avg(int arr[ROWS][COLS], const int ROWS, const int COLS);
+double Avg(double arr[ROWS][COLS], const int ROWS, const int COLS);
 
 void main()
 {
 	setlocale(LC_ALL, "");
+	const int n = 5;
+	int arr[n];
+	FillRand(arr, n);
+	Print(arr, n);
+	cout << endl;
+	Sort(arr, n);
+	Print(arr, n);
+	cout << "Сумма элементов массива: " << Sum(arr, n) << endl;
+	cout << "Средне-арефметическое элементов массива: " << Avg(arr, n) << endl;
+	cout << endl << endl;
 
-	int i;
-	cout << "Выберите задание: " << endl << "1 - int factorial(int n)" << endl << "2 - double power(double a, int n)"
-		<< endl << "3 - void Fibonacci(???), которая выводит на экран ряд Фибоначчи, до указанного предела;" << endl << "4 - void Fibonacci(???), которая выводит на экран заданное количество чисел из рядa Фибоначчи" << endl; cin >> i;
+	const int SIZE = 8;
+	double brr[SIZE];
+	FillRand(brr, SIZE);
+	Print(brr, SIZE);
+	cout << endl;
+	Sort(brr, SIZE);
+	Print(brr, SIZE);
+	cout << "Сумма элементов массива: " << Sum(brr, SIZE) << endl;
+	cout << "Средне-арефметическое элементов массива: " << Avg(brr, SIZE) << endl;
+	cout << endl << endl;
 
-	switch (i) 
-	{
-	case 1:
-		int n;
-		cout << "Введите число" << endl; cin >> n;
-		cout << "Факториал числа " << n << ": " << factorial(n) << endl;
-		break;
-	case 2:
-		double a; int b;
-		cout << "Введите число, которое нужно возвести в степень" << endl; cin >> a; 
-		cout << "Введите степень числа" << endl; cin >> b;
-		cout << "Число " << a << " в степени " << b << ": " << power(a, b) << endl;
-		break;
-	case 3:
-		int limit;
-		cout << "Введите предел ряда Фибоначчи" << endl; cin >> limit;
-		cout << fibonacci_limit(limit) << endl;
-		break;
-	case 4:
-		int number;
-		cout << "Введите количество чисел из ряда Фибоначчи" << endl; cin >> number;
-		cout << fibonacci_number(number) << endl;
-		break;
-	default: 
-		cout << "Такого задания нет" << endl;
-	}
+	double i_arr_2[ROWS][COLS];
+	int j_arr_2[ROWS][COLS];
+
+	FillRand(i_arr_2, ROWS, COLS);
+	Print(i_arr_2, ROWS, COLS);
+	cout << endl;
+	Sort(i_arr_2, ROWS, COLS);
+	Print(i_arr_2, ROWS, COLS);
+	cout << "Сумма элементов массива: " << Sum(i_arr_2, ROWS, COLS) << endl;
+	cout << "Средне-арефметическое элементов массива: " << Avg(i_arr_2, ROWS, COLS) << endl;
+	cout << endl << endl;
+
+	FillRand(j_arr_2, ROWS, COLS);
+	Print(j_arr_2, ROWS, COLS);
+	cout << endl;
+	Sort(j_arr_2, ROWS, COLS);
+	Print(j_arr_2, ROWS, COLS);
+	cout << "Сумма элементов массива: " << Sum(j_arr_2, ROWS, COLS) << endl;
+	cout << "Средне-арефметическое элементов массива: " << Avg(j_arr_2, ROWS, COLS) << endl;
+	cout << endl << endl;
+
 }
 
-		int factorial(int n)
+void FillRand(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
 	{
-		if (n == 0) return 1;
-		else return n * factorial(n - 1);
+		arr[i] = rand() % 100;
 	}
-
-		double power(double a, int b)
+}
+void FillRand(double arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = rand() % 10000;
+		arr[i] /= 100;
+	}
+}
+void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
 		{
-			double c = 1;
-			if (b == 0) return 1;
-			else {
-				while (b > 0, b--)
-				{
-					c = c * a;
-				}
-			return c;
+			arr[i][j] = rand() % 100;
+		}
+	}
+}
+void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			arr[i][j] = rand() % 10000;
+			arr[i][j] /= 100;
+		}
+	}
+}
+void Print(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << tab;
+	}
+	cout << endl;
+}
+void Print(double arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << tab;
+	}
+	cout << endl;
+}
+void Print(int arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			cout << arr[i][j] << tab;
+		}
+		cout << endl;
+	}
+}
+void Print(double arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			cout << arr[i][j] << tab;
+		}
+		cout << endl;
+	}
+}
+void Sort(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (arr[j] < arr[i])
+			{
+				int buffer = arr[i];
+				arr[i] = arr[j];
+				arr[j] = buffer;
 			}
 		}
-
-		int fibonacci_limit(int limit)
+	}
+}
+void Sort(double arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
 		{
-			int f = 0, g = 0, h = 1;
-			if (limit == 0) return 0;
-			if (limit == 1) return 1;
-			else 
-				while (f < (limit-f))
-				{
-					cout << f << ", ";
-					f = g + h;
-					g = h;
-					h = f;
-				}
-			return f;
+			if (arr[j] < arr[i])
+			{
+				double buffer = arr[i];
+				arr[i] = arr[j];
+				arr[j] = buffer;
+			}
 		}
-
-		int fibonacci_number(int number)
+	}
+}
+void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int l = 0; l < ROWS; l++)
+	{
+		for (int i = 0; i < COLS; i++)
 		{
-			int f = 0, g = 0, h = 1, j = 0;
-			if (number == 0) return 0;
-			if (number == 1) return 0;
-			else
-				while (j < (number - 1))
+			for (int j = i + 1; j < COLS; j++)
+			{
+				if (arr[l][j] < arr[l][i])
 				{
-					cout << f << ", ";
-					f = g + h;
-					g = h;
-					h = f;
-					j++;
+					int buffer = arr[l][i];
+					arr[l][i] = arr[l][j];
+					arr[l][j] = buffer;
 				}
-			return f;
+			}
 		}
+	}
+}
+void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int l = 0; l < ROWS; l++)
+	{
+		for (int i = 0; i < COLS; i++)
+		{
+			for (int j = i + 1; j < COLS; j++)
+			{
+				if (arr[l][j] < arr[l][i])
+				{
+					double buffer = arr[l][i];
+					arr[l][i] = arr[l][j];
+					arr[l][j] = buffer;
+				}
+			}
+		}
+	}
+}
+int Sum(int arr[], const int n)
+{
+	int sum = 0;
+	for (int i = 0; i < n; i++)
+	{
+		sum += arr[i];
+	}
+	return sum;
+}
+double Sum(double arr[], const int n)
+{
+	double sum = 0;
+	for (int i = 0; i < n; i++)
+	{
+		sum += arr[i];
+	}
+	return sum;
+}
+int Sum(int arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	double sum = 0;
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			sum += arr[i][j];
+		}
+	}
+	return sum;
+}
+double Sum(double arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	double sum = 0;
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			sum += arr[i][j];
+		}
+	}
+	return sum;
+}
+double Avg(int arr[], const int n)
+{
+	return (double)Sum(arr, n) / n;
+}
+double Avg(double arr[], const int n)
+{
+	return (double)Sum(arr, n) / n;
+}
+double Avg(int arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	return (double)Sum(arr, ROWS, COLS) / (ROWS * COLS);
+}
+double Avg(double arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	return (double)Sum(arr, ROWS, COLS) / (ROWS * COLS);
+}
